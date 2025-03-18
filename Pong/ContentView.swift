@@ -21,24 +21,27 @@ struct ContentView: View {
                 // Game Elements
                 BallView(position: gameEngine.ballPosition)
                 
+                // Player Paddle
                 PaddleView(
                     position: CGPoint(
-                        x: gameEngine.paddleWidth/2,
-                        y: gameEngine.playerPaddleY + gameEngine.paddleHeight/2
+                        x: gameEngine.paddleWidth / 2,
+                        y: gameEngine.playerPaddleY + gameEngine.paddleHeight / 2
                     ),
                     width: gameEngine.paddleWidth,
                     height: gameEngine.paddleHeight
                 )
                 
+                // Computer Paddle
                 PaddleView(
                     position: CGPoint(
-                        x: geometry.size.width - gameEngine.paddleWidth/2,
-                        y: gameEngine.computerPaddleY + gameEngine.paddleHeight/2
+                        x: geometry.size.width - gameEngine.paddleWidth / 2,
+                        y: gameEngine.computerPaddleY + gameEngine.paddleHeight / 2
                     ),
                     width: gameEngine.paddleWidth,
                     height: gameEngine.paddleHeight
                 )
                 
+                // Score Display
                 ScoreView(
                     playerScore: gameEngine.playerScore,
                     computerScore: gameEngine.computerScore
@@ -48,13 +51,14 @@ struct ContentView: View {
                 DragGesture()
                     .onChanged { value in
                         gameEngine.playerPaddleY = min(
-                            max(value.location.y - gameEngine.paddleHeight/2, 0),
+                            max(value.location.y - gameEngine.paddleHeight / 2, 0),
                             geometry.size.height - gameEngine.paddleHeight
                         )
                     }
             )
             .onAppear {
                 gameEngine.setScreenSize(geometry.size)
+                gameEngine.startGameLoop() // Ensure game loop starts when the view appears
             }
         }
     }

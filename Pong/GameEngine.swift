@@ -35,21 +35,21 @@ final class GameEngine: ObservableObject {
     }
     
     init() {
-        startGameLoop()
         updateBallSpeed() // Set ball speed based on settings
     }
     
-    func setScreenSize(_ size: CGSize) {
-        screenSize = size
-        resetBall()
-    }
-    
-    private func startGameLoop() {
+    // Change the access level here
+    func startGameLoop() {  // This used to be private
         timer = Timer.publish(every: 0.02, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 self?.updateGame()
             }
+    }
+    
+    func setScreenSize(_ size: CGSize) {
+        screenSize = size
+        resetBall()
     }
     
     private func updateGame() {
@@ -146,6 +146,7 @@ final class GameEngine: ObservableObject {
         }
     }
 }
+
 
 extension Color {
     // Convert hex string to Color

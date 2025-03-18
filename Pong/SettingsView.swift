@@ -53,13 +53,13 @@ struct SettingsView: View {
                     ))
                 }
 
-                // Sound Toggle
+                // Sound and Vibration Toggles
                 Section {
                     Toggle("Enable Sound", isOn: $soundEnabled)
                     Toggle("Enable Vibration", isOn: $vibrationEnabled)
                 }
 
-                // Close Button
+                // Save & Close Button
                 Button("Save & Close") {
                     presentationMode.wrappedValue.dismiss()
                 }
@@ -74,6 +74,7 @@ struct SettingsView: View {
     }
 }
 
+// Extension for Color to handle Hex conversion
 extension Color {
     // Convert hex string to Color
     init(hex: String) {
@@ -97,6 +98,9 @@ extension Color {
     }
 }
 
-#Preview {
-    SettingsView()
+// Preview for the Settings View
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingsView()
+    }
 }
